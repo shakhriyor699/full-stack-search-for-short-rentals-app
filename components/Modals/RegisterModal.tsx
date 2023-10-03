@@ -37,7 +37,7 @@ const RegisterModal = () => {
     setIsLoading(true)
 
     try {
-      await axios.post('/api/register', data);
+      await axios.post('/api/auth/register', data);
       await registerModal.onClose();
     } catch (error) {
       toast.error('Something went wrong')
