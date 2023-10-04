@@ -8,7 +8,7 @@ import bcrypt from "bcryptjs";
 
 
 
-export const authOptions: AuthOptions = {
+export const authOptions: AuthOptions = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
     GithubProvider({
@@ -20,19 +20,19 @@ export const authOptions: AuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
     CredentialsProvider({
-      name: 'credentials',
+      name: 'Credentials',
       credentials: {
-        email: { label: 'email', type: 'text' },
+        email: { label: 'email', type: 'email' },
         password: { label: 'password', type: 'password' },
       },
       async authorize(credentials) {
-        if (!credentials?.email || credentials?.password) {
+        if (!credentials?.email || !credentials?.password) {
           throw new Error('Please enter a valid email and password')
         }
 
         const user = await prisma.user.findUnique({
           where: {
-            email: credentials.email
+            email: credentials?.email
           }
         })
 
@@ -57,6 +57,6 @@ export const authOptions: AuthOptions = {
     strategy: 'jwt',
   },
   secret: process.env.NEXTAUTH_SECRET,
-}
+});
 
-export default NextAuth(authOptions)
+export { authOptions as GET, authOptions as POST }

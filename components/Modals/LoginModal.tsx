@@ -9,16 +9,22 @@ import {
   useForm
 } from 'react-hook-form';
 import useRegisterModal from "@/app/hooks/useRegisterModal"
+import useLoginModal from "@/app/hooks/useLoginModal"
 import Modal from "./Modal"
 import Heading from "../Heading/Heading"
 import Input from "../inputs/Input"
 import toast from "react-hot-toast"
 import Button from "../Button"
-import { signIn } from "next-auth/react"
+import { signIn, useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
 
-const RegisterModal = () => {
+
+const LoginModal = () => {
   const registerModal = useRegisterModal()
+  const loginModal = useLoginModal()
   const [isLoading, setIsLoading] = useState(false)
+  const router = useRouter()
+  // const session = useSession()
 
   const {
     register,
@@ -28,7 +34,6 @@ const RegisterModal = () => {
     }
   } = useForm<FieldValues>({
     defaultValues: {
-      name: '',
       email: '',
       password: '',
     }
@@ -36,33 +41,37 @@ const RegisterModal = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true)
+    
 
-    try {
-      await axios.post('/api/auth/register', data);
-      await registerModal.onClose();
-    } catch (error) {
-      toast.error('Something went wrong')
+    const result = await signIn('credentials', {
+      ...data,
+      redirect: false
+    })
+
+    if(result?.ok) {
+      toast.success('Logged in successfully')
+      router.refresh()
+      loginModal.onClose()
+      // console.log(session);
+      
     }
+
+    if(result?.error) {
+      toast.error(result.error)
+    }
+
     setIsLoading(false)
   }
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
       <Heading
-        title='Welcome'
-        subtitle='Create an account!'
+        title='Welcome back'
+        subtitle='Login to your account!'
       />
       <Input
         id="email"
         label="Email"
-        disabled={isLoading}
-        register={register}
-        errors={errors}
-        required
-      />
-      <Input
-        id="name"
-        label="Name"
         disabled={isLoading}
         register={register}
         errors={errors}
@@ -93,7 +102,7 @@ const RegisterModal = () => {
         outline
         label="Continue with Github"
         icon={AiFillGithub}
-        onClick={() => signIn('github')}
+        onClick={() => { }}
       />
       <div
         className="
@@ -124,9 +133,9 @@ const RegisterModal = () => {
   return (
     <Modal
       disabled={isLoading}
-      isOpen={registerModal.isOpen}
-      onClose={registerModal.onClose}
-      title="Register"
+      isOpen={loginModal.isOpen}
+      onClose={loginModal.onClose}
+      title="Login"
       actionLabel="Continue"
       onSubmit={handleSubmit(onSubmit)}
       body={bodyContent}
@@ -135,4 +144,4 @@ const RegisterModal = () => {
   )
 }
 
-export default RegisterModal
+export default LoginModal
