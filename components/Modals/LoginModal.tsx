@@ -15,7 +15,7 @@ import Heading from "../Heading/Heading"
 import Input from "../inputs/Input"
 import toast from "react-hot-toast"
 import Button from "../Button"
-import { signIn, useSession } from "next-auth/react"
+import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
 
 
@@ -41,22 +41,22 @@ const LoginModal = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true)
-    
+
 
     const result = await signIn('credentials', {
       ...data,
       redirect: false
     })
 
-    if(result?.ok) {
+    if (result?.ok) {
       toast.success('Logged in successfully')
       router.refresh()
       loginModal.onClose()
       // console.log(session);
-      
+
     }
 
-    if(result?.error) {
+    if (result?.error) {
       toast.error(result.error)
     }
 
@@ -96,13 +96,13 @@ const LoginModal = () => {
         outline
         label="Continue with Google"
         icon={FcGoogle}
-        onClick={() => { }}
+        onClick={() => signIn('google')}
       />
       <Button
         outline
         label="Continue with Github"
         icon={AiFillGithub}
-        onClick={() => { }}
+        onClick={() => signIn('github')}
       />
       <div
         className="
