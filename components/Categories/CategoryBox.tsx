@@ -1,3 +1,4 @@
+'use client'
 import { useRouter, useSearchParams } from "next/navigation"
 import { FC } from "react"
 import { IconType } from "react-icons"
@@ -8,14 +9,12 @@ interface CategoryBoxProps {
   key: string
   label: string
   icon: IconType
-  description: string
   selected?: boolean
 }
 
 const CategoryBox: FC<CategoryBoxProps> = ({ key,
   label,
   icon: Icon,
-  description,
   selected
 }) => {
   const router = useRouter()
@@ -25,7 +24,7 @@ const CategoryBox: FC<CategoryBoxProps> = ({ key,
 
   const handleClick = () => {
     let currentQuery = {}
-
+    
     if (params) {
       currentQuery = qs.parse(params.toString())
     }
@@ -34,8 +33,6 @@ const CategoryBox: FC<CategoryBoxProps> = ({ key,
       ...currentQuery,
       category: label
     }
-    console.log(updatedQuery);
-    
 
     if (params?.get('category') === label) {
       delete updatedQuery.category
@@ -47,8 +44,6 @@ const CategoryBox: FC<CategoryBoxProps> = ({ key,
     }, {
       skipNull: true
     })
-    console.log(url);
-    
 
     router.push(url)
   }
