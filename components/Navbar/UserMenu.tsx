@@ -7,6 +7,7 @@ import useRegisterModal from '@/app/hooks/useRegisterModal'
 import useLoginModal from '@/app/hooks/useLoginModal'
 import { signOut } from 'next-auth/react'
 import { SafeUser } from '@/app/types'
+import useRentModal from '@/app/hooks/useRentModal'
 
 
 interface UserMenuProps {
@@ -16,6 +17,7 @@ interface UserMenuProps {
 const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
   const registerModal = useRegisterModal()
   const loginModal = useLoginModal()
+  const rentModal = useRentModal()
   const [isOpen, setOpen] = useState(false)
 
 
@@ -23,11 +25,18 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
     setOpen(value => !value)
   }, [isOpen])
 
+  const onRent = () => {
+    if(!currentUser)  {
+      return loginModal.onOpen()
+    }
+    rentModal.onOpen()
+  }
+
   return (
     <div className="relative">
       <div className="flex items-center gap-3">
         <div
-          onClick={() => { }}
+          onClick={onRent}
           className="
             hidden
             md:block
@@ -84,23 +93,23 @@ const UserMenu: FC<UserMenuProps> = ({ currentUser }) => {
                 currentUser ? (
                   <>
                     <MenuItem
-                      onClick={() => {}}
+                      onClick={() => { }}
                       label='My trips'
                     />
                     <MenuItem
-                      onClick={() => {}}
+                      onClick={() => { }}
                       label='My favorites'
                     />
                     <MenuItem
-                      onClick={() => {}}
+                      onClick={() => { }}
                       label='My reservations'
                     />
                     <MenuItem
-                      onClick={() => {}}
+                      onClick={() => { }}
                       label='My properties'
                     />
                     <MenuItem
-                      onClick={() => {}}
+                      onClick={rentModal.onOpen}
                       label='Airbnb my home'
                     />
                     <hr />
