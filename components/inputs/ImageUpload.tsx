@@ -1,24 +1,26 @@
 'use client'
-import { useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 import { AiOutlineCloudUpload } from 'react-icons/ai';
 import { TbPhotoPlus } from 'react-icons/tb';
 import ImageUploading, { ImageListType } from 'react-images-uploading';
 import Image from 'next/image';
 
 
-const ImageUpload = () => {
-  const [images, setImages] = useState([]);
+interface ImageUploadProps {
+  value: any
+  onChange: (value: any) => void
+}
 
-  const onChange = (imageList: ImageListType, addUpdateIndex: number[] | undefined) => {
-    console.log(imageList);
-    
-    setImages(imageList as never[]);
-  };
+const ImageUpload: FC<ImageUploadProps> = ({ value, onChange }) => {
+  console.log(value);
+
+  
+  
 
   return (
     <ImageUploading
       multiple
-      value={images}
+      value={value}
       onChange={onChange}
 
     >
@@ -39,7 +41,7 @@ const ImageUpload = () => {
             {...dragProps}
           >
             <TbPhotoPlus size={200} />
-          Click or Drop here 
+            Click or Drop here
           </button>
 
           {imageList.length > 0 && <button
