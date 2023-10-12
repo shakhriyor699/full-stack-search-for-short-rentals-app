@@ -6,7 +6,7 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai"
 
 interface HeartButtonProps {
   listingId: string
-  currentUser: SafeUser | null
+  currentUser: SafeUser | null | undefined
 }
 
 const HeartButton: FC<HeartButtonProps> = ({

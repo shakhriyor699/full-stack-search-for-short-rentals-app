@@ -87,11 +87,29 @@ const ListingCard: FC<ListingCardProps> = ({
             "
           />
           <div className="absolute top-3 right-3">
-            <HeartButton 
+            <HeartButton
               listingId={data.id}
               currentUser={currentUser}
             />
           </div>
+        </div>
+        <div className="font-semibold text-lg">
+          {location?.region} , {location?.label}
+        </div>
+        <div className="font-light text-neutral-500">
+          {reservationDate || data.category}
+        </div>
+        <div className="flex items-center gap-1">
+          <div className="font-semibold text-2xl">
+            ${price}
+          </div>
+          {
+            !reservation && (
+              <div className="font-light text-neutral-500">
+                / night
+              </div>
+            )
+          }
         </div>
       </div>
     </div>
