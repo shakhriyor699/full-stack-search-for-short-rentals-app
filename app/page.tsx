@@ -32,7 +32,7 @@ export default async function Home() {
           gap-8
         '
       >
-        {listings.map((listing: any) => (
+        {listings.map((listing) => (
           <ListingCard key={listing.id} currentUser={currentUser} data={listing} />
         ))}
       </div>

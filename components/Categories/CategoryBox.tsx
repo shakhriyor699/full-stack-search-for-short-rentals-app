@@ -6,13 +6,12 @@ import qs from 'query-string'
 
 
 interface CategoryBoxProps {
-  key: string
   label: string
   icon: IconType
   selected?: boolean
 }
 
-const CategoryBox: FC<CategoryBoxProps> = ({ key,
+const CategoryBox: FC<CategoryBoxProps> = ({ 
   label,
   icon: Icon,
   selected
