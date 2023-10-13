@@ -7,6 +7,7 @@ import { FC, MouseEvent, useMemo } from "react"
 import { format } from "date-fns"
 import Image from "next/image"
 import HeartButton from "../HeartButton"
+import Button from "../Button"
 
 
 interface ListingCardProps {
@@ -111,6 +112,16 @@ const ListingCard: FC<ListingCardProps> = ({
             )
           }
         </div>
+        {
+          onAction && actionLabel && (
+            <Button
+              disabled={disabled}
+              small
+              label={actionLabel}
+              onClick={handleCancel}
+            />
+          )
+        }
       </div>
     </div>
   )

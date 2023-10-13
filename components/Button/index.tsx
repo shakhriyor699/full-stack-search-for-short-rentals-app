@@ -4,7 +4,7 @@ import { FC } from "react"
 
 
 interface ButtonProps {
-  label: string
+  label: string | undefined
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
   disabled?: boolean
   outline?: boolean
