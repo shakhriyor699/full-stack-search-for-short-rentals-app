@@ -5,6 +5,7 @@ import { SafeUser } from "@/app/types"
 import { FC } from "react"
 import Heading from "../Heading/Heading"
 import Image from "next/image"
+import HeartButton from "../HeartButton"
 
 interface ListingHeadProps {
   title: string
@@ -34,13 +35,19 @@ const ListingHead: FC<ListingHeadProps> = ({
       <div
         className="
           w-full
-          h-[6-vh]
+          h-[70vh]
           overflow-hidden
           rounded-xl
           relative
         "
       >
-        <Image fill src={imageSrc} alt="" />
+        <Image fill src={imageSrc} alt="Image" className="object-cover w-full" />
+        <div className="absolute top-5 right-5">
+          <HeartButton 
+            listingId={id}
+            currentUser={currentUser}
+          />
+        </div>
       </div>
     </>
   )
