@@ -31,10 +31,10 @@ export const getResevations = async ({ listingId, userId, authorId }: IParams) =
       orderBy: {
         createdAt: 'desc'
       }
-    })
+    });
 
-    const safeReservations = reservations.map((reservation) => (
-      {
+    const safeReservations = reservations.map(
+      (reservation) => ({
         ...reservation,
         createdAt: reservation.createdAt.toISOString(),
         startDate: reservation.startDate.toISOString(),
@@ -42,10 +42,10 @@ export const getResevations = async ({ listingId, userId, authorId }: IParams) =
         listing: {
           ...reservation.listing,
           createdAt: reservation.listing.createdAt.toISOString(),
-        }
-      }
-    ))
-    return safeReservations
+        },
+      }));
+
+    return safeReservations;
   } catch (error: any) {
     throw new Error(error)
   }
