@@ -3,7 +3,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 import prisma from "../libs/prisma";
 
-export const getSession = async () => {
+export const getSession: () => Promise<import("next-auth").Session | null> = async () => {
   return await getServerSession(authOptions);
 }
 

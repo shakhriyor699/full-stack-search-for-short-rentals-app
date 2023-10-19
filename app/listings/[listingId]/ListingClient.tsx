@@ -1,13 +1,11 @@
 'use client'
-
 import useLoginModal from "@/app/hooks/useLoginModal"
-import { SafeListing, SafeUser } from "@/app/types"
+import { SafeListing, SafeReservation, SafeUser } from "@/app/types"
 import { categories } from "@/components/Categories"
 import Container from "@/components/Container"
 import ListingHead from "@/components/ListingHead"
 import ListingInfo from "@/components/ListingInfo"
 import ListingReservation from "@/components/ListingReservation"
-import { Reservation } from "@prisma/client"
 import axios from "axios"
 import { eachDayOfInterval, differenceInCalendarDays } from "date-fns"
 import { useRouter } from "next/navigation"
@@ -27,7 +25,7 @@ interface ListingClientProps {
     user: SafeUser
   }
   currentUser?: SafeUser | null
-  reservations?: Reservation[]
+  reservations?: SafeReservation[]
 }
 
 const ListingClient: FC<ListingClientProps> = ({
@@ -131,13 +129,13 @@ const ListingClient: FC<ListingClientProps> = ({
                 md:col-span-3
               "
             >
-              <ListingReservation  
+              <ListingReservation
                 price={listing.price}
                 totalPrice={totalPrice}
                 onChangeDate={(range) => setDateRange(range)}
                 dateRange={dateRange}
                 onSubmit={onCreateReservation}
-                disabled={isLoading || !currentUser || disabledDates.length === 0}
+                disabled={isLoading}
                 disabledDates={disabledDates}
               />
             </div>
