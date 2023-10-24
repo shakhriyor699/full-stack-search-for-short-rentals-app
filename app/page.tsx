@@ -9,8 +9,8 @@ interface HomeProps {
   searchParams: IListingsParams
 }
 
-export default async function Home() {
-  const listings = await getListings()
+export default async function Home({ searchParams }: HomeProps) {
+  const listings = await getListings(searchParams)
   const currentUser = await getCurrentUser()
 
 
