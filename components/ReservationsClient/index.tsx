@@ -52,7 +52,7 @@ const ReservationsClient: FC<ReservationsClientProps> = ({
         "
       >
         {
-          reservations.map((reservation) => (
+          reservations.map((reservation: any) => (
             <ListingCard 
               key={reservation.id}
               reservation={reservation}

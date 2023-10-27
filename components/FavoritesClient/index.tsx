@@ -34,7 +34,7 @@ const FavoritesClient: FC<FavoritesClientProps> = ({
       "
       >
         {
-          listings.map(listing => (
+          listings.map((listing: any) => (
             <ListingCard
               key={listing.id}
               data={listing}

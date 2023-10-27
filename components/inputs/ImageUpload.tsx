@@ -14,8 +14,8 @@ interface ImageUploadProps {
 const ImageUpload: FC<ImageUploadProps> = ({ value, onChange }) => {
   console.log(value);
 
-  
-  
+
+
 
   return (
     <ImageUploading
@@ -61,7 +61,7 @@ const ImageUpload: FC<ImageUploadProps> = ({ value, onChange }) => {
             onClick={onImageRemoveAll}>
             Remove all images
           </button>}
-          {imageList.map((image, index) => (
+          {imageList.map((image: any, index: number) => (
             <div key={index}>
               <Image src={image.dataURL ? image.dataURL : ''} alt="" width="100" height={100} />
               <div className="flex w-full mt-4 items-center gap-4 ">

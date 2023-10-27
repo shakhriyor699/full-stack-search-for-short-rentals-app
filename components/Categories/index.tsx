@@ -111,7 +111,7 @@ const Categories = () => {
         "
       >
         {
-          categories.map(item => (
+          categories.map((item: any) => (
             <CategoryBox
               key={item.label}
               label={item.label}
