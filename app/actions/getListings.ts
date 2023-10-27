@@ -35,23 +35,25 @@ const getListings = async (params: IListingsParams) => {
       query.category = category
     }
     if (roomCount) {
-      query.rooCount = {
+      query.roomCount = {
         gte: +roomCount
       }
     }
-    if(bathroomCount) {
-      query.bathroomCount = {
-        gte: +bathroomCount
-      }
-    }
-    if(guestCount) {
+
+    if (guestCount) {
       query.guestCount = {
         gte: +guestCount
       }
     }
+    if (bathroomCount) {
+      query.bathroomCount = {
+        gte: +bathroomCount
+      }
+    }
 
-    if(locationValue) {
-      query.locationValue = locationValue
+
+    if (locationValue) {
+      query.locationValue = locationValue;
     }
 
     if(startDate && endDate) {

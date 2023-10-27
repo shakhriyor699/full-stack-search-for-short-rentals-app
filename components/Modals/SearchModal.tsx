@@ -47,6 +47,9 @@ const SearchModal = () => {
     setStep(step => step + 1)
   }
 
+ 
+  
+
   const onSubmit = async () => {
     if (step !== STEPS.INFO) {
       return onNext()

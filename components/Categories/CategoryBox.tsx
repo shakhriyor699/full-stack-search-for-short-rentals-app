@@ -19,6 +19,8 @@ const CategoryBox: FC<CategoryBoxProps> = ({
   const router = useRouter()
   const params = useSearchParams()
 
+  
+
 
 
   const handleClick = () => {

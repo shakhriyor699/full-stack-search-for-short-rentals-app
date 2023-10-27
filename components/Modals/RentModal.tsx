@@ -96,7 +96,7 @@ const RentModal = () => {
       ...data,
       imageSrc: imageSrc[0].dataURL,
     }
-    console.log(newData);
+    
     
     
 
