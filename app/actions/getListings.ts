@@ -56,7 +56,7 @@ const getListings = async (params: IListingsParams) => {
       query.locationValue = locationValue;
     }
 
-    if(startDate && endDate) {
+    if (startDate && endDate) {
       query.NOT = {
         reservations: {
           some: {
@@ -82,7 +82,7 @@ const getListings = async (params: IListingsParams) => {
       }
     })
 
-    return listings.map((listing) => ({
+    return listings.map((listing: any) => ({
       ...listing,
       createdAt: listing.createdAt.toISOString()
     }))
