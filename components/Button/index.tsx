@@ -38,6 +38,7 @@ const Button: FC<ButtonProps> = ({
       `}
     >
       {Icon && (
+        // @ts-ignore
         <Icon
           size={24}
           className="absolute left-4 top-3"
